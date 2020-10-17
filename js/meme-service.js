@@ -3,7 +3,7 @@
 let gMemes = [];
 let gKeywords = { 'happy': 12, 'funny puk': 1 }
 let gIcons = [{ url: 'icons/cap.png', keyword: 'cap' }, { url: 'icons/crown.png', keyword: 'crown' }, { url: 'icons/gift.png', keyword: 'gift' }, { url: 'icons/thriller.png', keyword: 'thriller' }]
-let gImages = [{ id: 1, url: 'img/trump.jpg', keywords: ['stupid'] }, { id: 2, url: 'img/clown.jpg', keywords: ['funny'] }, { id: 3, url: 'img/2.jpg', keywords: ['vista'] }, { id: 4, url: 'img/004.jpg', keywords: ['cute', 'dog'] }, { id: 5, url: 'img/005.jpg', keywords: ['adorable', 'cute', 'dog'] }, { id: 6, url: 'img/5.jpg', keywords: ['winning'] }, { id: 7, url: 'img/9.jpg', keywords: ['sneaky'] }, { id: 8, url: 'img/Ancient-Aliens.jpg', keywords: ['aliens'] }, { id: 9, url: 'img/patrick.jpg', keywords: ['cringe'] }, { id: 10, url: 'img/oprah.jpg', keywords: ['oprah'] }, { id: 11, url: 'img/One-Does-Not-Simply.jpg', keywords: ['boromir']}, { id: 12, url: 'img/putin.jpg', keywords: ['putin'] }];
+let gImages = [{ id: 1, url: 'img/trump.jpg', keywords: ['stupid'] }, { id: 2, url: 'img/clown.jpg', keywords: ['funny'] }, { id: 3, url: 'img/2.jpg', keywords: ['vista'] }, { id: 4, url: 'img/004.jpg', keywords: ['cute', 'dog'] }, { id: 5, url: 'img/005.jpg', keywords: ['adorable', 'cute', 'dog'] }, { id: 6, url: 'img/5.jpg', keywords: ['winning'] }, { id: 7, url: 'img/9.jpg', keywords: ['sneaky'] }, { id: 8, url: 'img/Ancient-Aliens.jpg', keywords: ['aliens'] }, { id: 9, url: 'img/patrick.jpg', keywords: ['cringe'] }, { id: 10, url: 'img/Oprah.jpg', keywords: ['oprah'] }, { id: 11, url: 'img/One-Does-Not-Simply.jpg', keywords: ['boromir']}, { id: 12, url: 'img/putin.jpg', keywords: ['putin'] }];
 
 let gMeme = {
     selectedImgId: 0,
