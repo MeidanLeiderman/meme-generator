@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeGeN</title>
+</head>
+
+<body onload="init()">
+    <header class="top-banner container flex row space-between">
+        <span class="logo">Meme Generator</span>
+        <navbar class="navbar flex row">
+            <a href="#" onclick="openGallery()">gallery</a>
+            <a href="#" onclick="openPublishedMemes()">Memes</a>
+            <a href="#">about</a>
+        </navbar>
+    </header>
+
+    <main class="main-section container">
+        <section class="image-filter flex space-between">
+            <div class="input-image-style">
+                <input type="text" placeholder="search image by keyword"
+                    oninput="renderGalleryByFilter(this.value)"></input>
+                <img src="/icons/search-icon.png" alt="">
+            </div>
+            <div class="keyword-search-section flex">
+                <div class="keywords-container flex row wrap"></div>
+                <span class="expand-collapse-btn" onclick="showAllKeywords()">show more...</span>
+            </div>
+        </section>
+        <!-- <input class="file-input btn" type="file" name="image" onchange="onImgInput(event)" />
+        <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+            <input name="img" id="imgData" type="hidden" />
+            <button class="btn" type="submit">Publish</button>
+            <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+            <div class="share-container"></div>
+        </form> -->
+        <div class="gallery "></div>
+    </main>
+
+    <div class="memes-container"></div>
+
+    <div class="meme-editor container">
+        <div class="parent-container">
+
+            <canvas class="my-canvas" onmouseup="mouseUp(event)" onmousedown="mouseDown(event)"
+                onmousemove="mouseMove(event)">
+                Update your browser to enjoy canvas!
+            </canvas>
+
+            <div class="editor-toolbar flex column space-between align-center">
+                <div class="button-row1 flex wrap justify-center">
+                    <div class="text-input-box">
+                        <input type="text" placeholder="enter text" class="textbox"
+                            oninput="onChangeText(this.value)" />
+                    </div>
+                    <img src="icons/add.png" alt="" ontouchstart="onAddTextLine()" onclick="onAddTextLine()" />
+                    <img src="icons/trash.png" alt="" onclick="onRemoveElement()" />
+                    <img src="icons/up-and-down-opposite-double-arrows-side-by-side.png" alt=""
+                        onclick="onSwitchLine()" />
+                </div>
+
+                <div class="button-row2 flex wrap">
+                    <div class="sub-btn-container">
+                        <img src="icons/increase font - icon.png" alt="" onclick="onEditTextSize('+')" />
+                        <img src="icons/decrease font - icon.png" alt="" onclick="onEditTextSize('-')" />
+                        <img src="icons/align-to-left.png" alt="" onclick="onAlignText('left')" />
+                        <img src="icons/center-text-alignment.png" alt="" onclick="onAlignText('center')" />
+                        <img src="icons/align-to-right.png" alt="" onclick="onAlignText('right')" />
+                    </div>
+                    <select onchange="onSetFont(this.value)">
+                        <option value="Ariel" style="font-family:Ariel">Ariel</option>
+                        <option value="Bitter" style="font-family:Bitter">Bitter</option>
+                        <option value="Nunito" style="font-family:Nunito">Nunito</option>
+                        <option value="SuezOne" style="font-family:SuezOne">SuezOne</option>
+                    </select>
+                    <img class="palette-btn" src="icons/paint-board-and-brush.png" alt="" onclick="togglePalette()" />
+                    <div class="palette-container flex row wrap"></div>
+                </div>
+                <div class="button-row3 flex row">
+                    <img src="icons/left-arrow.png" alt="" onclick="onNextIcon(-1)" />
+                    <div class="icon-container"></div>
+                    <img src="icons/right-arrow.png" alt="" onclick="onNextIcon(+1)" />
+                </div>
+                <div class="button-row4 flex row">
+                    <button class="sqr-btn" onclick="publishMeme()">Publish</button>
+                    <a href="#" onclick="downloadMeme(this)" download="my-meme.jpg">
+                        <button class="sqr-btn">Download</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer class="container">
+        <h5>All rights reserved</h5>
+    </footer>
+    <script src="js/utilities-service.js"></script>
+    <script src="js/upload-service.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
