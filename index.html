@@ -10,10 +10,15 @@
 
 <body onload="init()">
     <header class="top-banner container flex row space-between">
-        <span class="logo">Meme Generator</span>
-        <navbar class="navbar flex row">
+        <h4 class="logo">Meme Generator</h4>
+        <span class="navbar-btn" onclick="toggleNavbar()">☰</span>
+        <navbar class="navbar flex">
+            <div class="top-menu-bar">
+                <h5>Menu</h5>
+                <span onclick="toggleNavbar()">X</span>
+            </div>
             <a href="#" onclick="openGallery()">gallery</a>
-            <a href="#" onclick="openPublishedMemes()">Memes</a>
+            <a href="#" onclick="openPublishedMemes()">memes</a>
             <a href="#">about</a>
         </navbar>
     </header>
@@ -27,7 +32,7 @@
             </div>
             <div class="keyword-search-section flex">
                 <div class="keywords-container flex row wrap"></div>
-                <span class="expand-collapse-btn" onclick="showAllKeywords()">show more...</span>
+                <span class="expand-collapse-btn" onclick="showAllKeywords()">more...</span>
             </div>
         </section>
         <!-- <input class="file-input btn" type="file" name="image" onchange="onImgInput(event)" />
@@ -96,8 +101,9 @@
     </div>
 
 
-    <footer class="container">
-        <h5>All rights reserved</h5>
+    <footer class="footer flex column container">
+        <h4 class="logo">Meme Generator</h4>
+        <h5>All rights reserved 2020</h5>
     </footer>
     <script src="js/utilities-service.js"></script>
     <script src="js/upload-service.js"></script>

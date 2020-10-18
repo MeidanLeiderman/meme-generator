@@ -135,12 +135,14 @@ function openPublishedMemes() {
     document.querySelector('.meme-editor').style.display = "none"
     document.querySelector('.memes-container').style.display = "block"
     renderMemes();
+    toggleNavbar();
 }
 
 function openGallery() {
     document.querySelector('main').style.display = "block"
     document.querySelector('.meme-editor').style.display = "none"
     document.querySelector('.memes-container').style.display = "none"
+    toggleNavbar()
 }
 
 function renderMemes() {
@@ -453,6 +455,18 @@ function clearCanvas() {
     gContext.fillStyle = 'rgba(255, 255, 255, 0)'
     gContext.fillRect(0, 0, gCanvas.width, gCanvas.height)
     gContext.clearRect(0, 0, gCanvas.width, gCanvas.height)
+}
+
+
+let isNavbarOpen = false
+function toggleNavbar(){
+    isNavbarOpen = !isNavbarOpen
+    if(isNavbarOpen){
+        document.querySelector('.navbar').classList.add('navbar-open')
+    }
+    else{
+        document.querySelector('.navbar').classList.remove('navbar-open')
+    }
 }
 
 // function scrollToTop(){
