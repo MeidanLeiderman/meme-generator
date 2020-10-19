@@ -256,6 +256,145 @@ function updateInputBox(text) {
     inputField.value = text
 }
 
+function touchStart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let txts = getMeme().txts;
+    let icons = getMeme().icons
+
+    let offsetX = gCanvas.offsetLeft
+    let offsetY = gCanvas.offsetTop
+    e.clientX = e.touches[0].clientX
+    e.clientY = e.touches[0].clientY
+
+    let mx = parseInt(e.clientX - offsetX);
+    let my = parseInt(e.clientY - offsetY);
+    let selectedElement = getSelectedElement();
+    // console.log('touchdown', e.clientX)
+
+    dragOn = false;
+    // for icons
+    if (icons.length) {
+        for (var y = 0; y < icons.length; y++) {
+            let icon = icons[y]
+            if (selectedElement.data.id === icon.id) {
+                // THERE IS A PROBLEM WITH THE RESIZER - DOES NOT RECOGNIZE WHEN YOU HIT INSIDE THE CORNER
+                draggingResizer = anchorHitTest(icon, mx, my)
+                console.log('draggingResizer', draggingResizer)
+            }
+
+            if (mx > icon.x && mx < icon.x + icon.width && my > icon.y && my < icon.y + icon.height) {
+                setSelectedElement('icon', icon)
+                dragOn = true;
+                icon.isDragging = true;
+            }
+        }
+    }
+
+    // for texts
+    for (var i = 0; i < txts.length; i++) {
+        let text = txts[i];
+        let width = gContext.measureText(text.line).width
+        let y = text.height - text.size
+        let heightY = text.size + (text.size * 0.25)
+        // console.log(mx)
+        // console.log(text.posX)
+        console.log(e.clientX)
+
+        if (mx > text.posX && mx < text.posX + width && my > y && my < y + heightY) {
+            setSelectedElement('text', text)
+            dragOn = true;
+            text.isDragging = true;
+            console.log('in')
+        }
+    }
+    updateCanvas()
+    // save the current mouse position
+    startX = mx;
+    startY = my;
+}
+
+
+function touchUp(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let txts = getMeme().txts;
+    dragOn = false;
+    for (var i = 0; i < txts.length; i++) {
+        txts[i].isDragging = false;
+    }
+
+    let icons = getMeme().icons
+    for (var y = 0; y < icons.length; y++) {
+        icons[y].isDragging = false
+        icons[y].isResizing = false
+    }
+}
+
+function touchMove(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let txts = getMeme().txts;
+    let icons = getMeme().icons
+    let offsetX = gCanvas.offsetLeft
+    let offsetY = gCanvas.offsetTop
+    e.clientX = e.touches[0].clientX
+    e.clientY = e.touches[0].clientY
+
+    let mx = parseInt(e.clientX - offsetX);
+    let my = parseInt(e.clientY - offsetY);
+
+    // calculate the distance the mouse has moved since the last mousemove
+    let dx = mx - startX;
+    let dy = my - startY;
+
+    if (draggingResizer > -1) {
+        for (var y = 0; y < icons.length; y++) {
+            let icon = icons[y];
+
+            if (icon.isResizing) { resizeIcon(icon, mx, my) }
+        }
+    }
+
+    if (dragOn) {
+
+        //for text dragging
+        for (var i = 0; i < txts.length; i++) {
+            let t = txts[i];
+
+            // FIGURE THIS OUT - how to exit if mouse steps out of the canvas while dragging
+            // if(e.clientX-gCanvas.offsetLeft<0 || e.clientX-gCanvas.offsetLeft>500 || e.clientY-gCanvas.offsetTop<0 || e.clientY-gCanvas.offsetTop>500) {
+            //     t.isDragging=false
+            // }
+            if (t.isDragging) {
+                t.posX += dx;
+                t.height += dy;
+            }
+        }
+
+        // for icon dragging
+        for (var y = 0; y < icons.length; y++) {
+            let icon = icons[y];
+
+            // FIGURE THIS OUT - how to exit if mouse steps out of the canvas while dragging
+            // if(e.clientX-gCanvas.offsetLeft<0 || e.clientX-gCanvas.offsetLeft>500 || e.clientY-gCanvas.offsetTop<0 || e.clientY-gCanvas.offsetTop>500) {
+            //     t.isDragging=false
+            // }
+            if (icon.isDragging) {
+                icon.x += dx;
+                icon.y += dy;
+            }
+        }
+    }
+    updateCanvas();
+    // reset the starting mouse position for the next mousemove
+    startX = mx;
+    startY = my;
+}
+
 function mouseDown(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -265,10 +404,13 @@ function mouseDown(e) {
 
     let offsetX = gCanvas.offsetLeft
     let offsetY = gCanvas.offsetTop
+    console.log(offsetX)
 
     let mx = parseInt(e.clientX - offsetX);
     let my = parseInt(e.clientY - offsetY);
     let selectedElement = getSelectedElement();
+    // console.log('touchdown', e.clientX)
+
 
 
     dragOn = false;
@@ -300,12 +442,15 @@ function mouseDown(e) {
         let width = gContext.measureText(text.line).width
         let y = text.height - text.size
         let heightY = text.size + (text.size * 0.25)
+        // console.log(mx)
+        // console.log(text.posX)
+        console.log(e.clientX)
 
         if (mx > text.posX && mx < text.posX + width && my > y && my < y + heightY) {
             setSelectedElement('text', text)
             dragOn = true;
             text.isDragging = true;
-
+            console.log('in')
         }
     }
     updateCanvas()
@@ -459,12 +604,12 @@ function clearCanvas() {
 
 
 let isNavbarOpen = false
-function toggleNavbar(){
+function toggleNavbar() {
     isNavbarOpen = !isNavbarOpen
-    if(isNavbarOpen){
+    if (isNavbarOpen) {
         document.querySelector('.navbar').classList.add('navbar-open')
     }
-    else{
+    else {
         document.querySelector('.navbar').classList.remove('navbar-open')
     }
 }

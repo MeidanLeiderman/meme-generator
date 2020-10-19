@@ -221,18 +221,6 @@ input:focus{
     margin: 0 0 0 30px;
 }
 
-/* .button-row2>*{
-    margin-right: 10px;
-} */
-
-/* .button-row2 img:nth-child(5){
-    margin-right: 0;
-} */
-
-.button-row2{
-    /* justify-content: flex-start; */
-}
-
 .sub-btn-container{
     width: 100%;
     display: flex;
@@ -288,12 +276,6 @@ input:focus{
     padding: 0;
 }
 
-.icon-container{
-    /* transition-property: transform;
-    transition-duration: 1s; */
-    /* width: 100%; */
-}
-
 .icon-container .icon{
     width: 70px;
     height: auto;
@@ -336,7 +318,7 @@ input:focus{
     .navbar-btn{
         display: block;
         height: 4rem;
-        padding: 25px 0 0 1rem;git 
+        padding: 25px 0 0 1rem;
         line-height: 100%;
         font-size: 1.25rem;
     }
